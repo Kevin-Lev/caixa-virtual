@@ -28,10 +28,6 @@ const MovimentacoesList = ({ caixa }) => (
                         <th>Data</th>
                     </tr>
                 </thead>
-                {/* <tbody>
-                    <td>{caixa.id}</td>
-                    <td>{caixa.saldoTotal}</td>
-                </tbody> */}
                 {caixa.movimentacoes.map((row) => (
                     <tbody key={row.id}>
                         <tr>
@@ -41,7 +37,7 @@ const MovimentacoesList = ({ caixa }) => (
                             <td>{row.tipo}</td>
                             <td>{row.descricao}</td>
                             <td>{row.valor}</td>
-                            <td>{row.categoria.id}</td>
+                            <td>{row.categoria._id}</td>
                             <td>{row.categoria.name}</td>
                             <td>{moment(row.data).format('DD-MM-YYYY HH:MM')}</td>
                         </tr>

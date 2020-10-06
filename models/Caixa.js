@@ -1,3 +1,4 @@
+const { ObjectId } = require('mongodb');
 const mongoose = require('mongoose');
 
 const CaixaSchema = new mongoose.Schema(
@@ -21,14 +22,8 @@ const CaixaSchema = new mongoose.Schema(
                     required: true
                 },
                 categoria: {
-                    id: {
-                        type: String,
-                        required: true
-                    },
-                    name: {
-                        type: String,
-                        required: true
-                    }
+                    type: ObjectId,
+                    ref: 'Categoria'
                 },
                 tipo: {
                     type: String,
