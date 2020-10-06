@@ -21,7 +21,13 @@ const Header = () => (
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item>
-                            <Link href="/ceps">
+                            <Link href="/categorias/new">
+                                <a style={{ color: 'black' }}>Adicionar categoria</a>
+                            </Link>
+                        </NavDropdown.Item>
+                        <NavDropdown.Divider />
+                        <NavDropdown.Item>
+                            <Link href="/caixa/5f7b7eab23f46a3506c76d2c">
                                 <a style={{ color: 'black' }}>Lista de registros</a>
                             </Link>
                         </NavDropdown.Item>
