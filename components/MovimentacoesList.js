@@ -1,5 +1,5 @@
 import { Table, Container, Row } from 'react-bootstrap';
-import moment from 'moment'
+import moment from 'moment';
 
 const MovimentacoesList = ({ caixa }) => (
     <Container style={{ marginTop: 120, marginBottom: '20%', width: '60%' }}>

@@ -8,7 +8,7 @@ const CaixaSchema = new mongoose.Schema(
         // },
         saldoTotal: {
             type: Number,
-            required: [true, 'Por favor, adicione um valor númerico para o saldo do seu caixa'],
+            required: [true, 'Por favor, adicione um valor númerico para o saldo do seu caixa']
         },
         movimentacoes: [
             {

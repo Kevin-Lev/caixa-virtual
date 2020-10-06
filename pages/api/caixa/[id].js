@@ -39,5 +39,5 @@ export default async (req, res) => {
                 res.status(400).json({ sucess: false });
             }
             break;
-        }
-}
+    }
+};

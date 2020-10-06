@@ -4,7 +4,7 @@ import { Container, Row, Button, Form, Alert } from 'react-bootstrap';
 export default function NewCategoria() {
     const [form, setForm] = useState({ name: '' });
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [insertedCategory, setInsertedCategory] = useState('')
+    const [insertedCategory, setInsertedCategory] = useState('');
     const [errors, setErrors] = useState({});
     const [showAlert, setShowAlert] = useState(false);
 
@@ -13,7 +13,7 @@ export default function NewCategoria() {
             if (Object.keys(errors).length === 0) {
                 createCategoria();
                 setIsSubmitting(false);
-            } 
+            }
         }
     });
 
@@ -22,7 +22,7 @@ export default function NewCategoria() {
         let errs = validate();
         setErrors(errs);
         setIsSubmitting(true);
-        setInsertedCategory(form.name)
+        setInsertedCategory(form.name);
         if (Object.keys(errs).length === 0 && errs.constructor === Object) {
             setShowAlert(true);
         }
@@ -72,15 +72,11 @@ export default function NewCategoria() {
                                 placeholder="Nome"
                                 name="name"
                                 onChange={handleChange}
-                                isInvalid={
-                                    errors.name
-                                }
-                                isValid={
-                                    form.name
-                                }
+                                isInvalid={errors.name}
+                                isValid={form.name}
                             />
                             <Form.Control.Feedback type="invalid">
-                                {errors.name }
+                                {errors.name}
                             </Form.Control.Feedback>
                             <Form.Text className="text-muted">
                                 Digite um nome para a categoria.
@@ -94,11 +90,16 @@ export default function NewCategoria() {
                     </Form>
                 </Row>
                 <Row className="justify-content-center">
-                    <Alert show={showAlert} dismissible style={{ marginTop: 30 }} variant="success" onClose={() => setShowAlert(false)}>
+                    <Alert
+                        show={showAlert}
+                        dismissible
+                        style={{ marginTop: 30 }}
+                        variant="success"
+                        onClose={() => setShowAlert(false)}>
                         A categoria {insertedCategory} foi cadastrada com sucesso!{' '}
                     </Alert>
                 </Row>
             </Container>
         </>
-    )
+    );
 }
