@@ -1,23 +1,32 @@
 import { Container, Card, Row, Col, Form, Alert, Button } from 'react-bootstrap';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 export default function newMovimentacao({ caixa, categorias }) {
-    const [form, setForm] = useState({ name: '' });
+    const formCatValue = categorias && categorias.length ? categorias[0]._id : null;
+
+    const [form, setForm] = useState({
+        categoria: formCatValue,
+        tipo: 'ENTRADA',
+        valor: 0.0,
+        descricao: ''
+    });
     const [isSubmitting, setIsSubmitting] = useState(false);
     // const [insertedMove, setInsertedMove] = useState('');
     const [errors, setErrors] = useState({});
     const [showAlert, setShowAlert] = useState(false);
 
-    // useEffect(() => {
-    //     if (isSubmitting) {
-    //         if (Object.keys(errors).length === 0) {
-    //             createMovimentacao();
-    //             setIsSubmitting(false);
-    //         }
-    //     }
-    // });
+    useEffect(() => {
+        if (isSubmitting) {
+            if (Object.keys(errors).length === 0) {
+                createMovimentacao();
+                setIsSubmitting(false);
+            }
+        }
+    });
 
     const handleSubmit = (event) => {
+        console.log('HANDLE SUBMIT');
         event.preventDefault();
         let errs = validate();
         setErrors(errs);
@@ -29,12 +38,12 @@ export default function newMovimentacao({ caixa, categorias }) {
     };
 
     const handleChange = (event) => {
+        console.log(event.target.value);
         setForm({
             ...form,
             [event.target.name]: event.target.value
         });
-    };    
-
+    };
 
     const validate = () => {
         let err = {};
@@ -50,28 +59,51 @@ export default function newMovimentacao({ caixa, categorias }) {
         return err;
     };
 
-    const saldoUpdate = () => {
+    const bodyUpdate = () => {
+        console.log(typeof caixa.saldoTotal);
+        console.log(typeof form.valor);
 
-        if (form.tipo === "ENTRADA") {
+        // caixa.saldoTotal = parseFloat(caixa.saldoTotal)
 
+        if (form.tipo === 'ENTRADA') {
+            caixa.saldoTotal += parseFloat(form.valor);
+        } else {
+            caixa.saldoTotal -= parseFloat(form.valor);
         }
-    }
 
-    const createMovimentacao = async ({ query: { id } }) => {
+        caixa.movimentacoes.push({
+            data: Date.now(),
+            id: idGenerator(),
+            categoria: form.categoria,
+            tipo: form.tipo,
+            valor: form.valor,
+            descricao: form.descricao
+        });
+
+        console.log('updatedCaixa');
+        console.log(caixa);
+        return caixa;
+    };
+
+    const idGenerator = () =>
+        Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+    const createMovimentacao = async () => {
         try {
-            const res = await fetch(`http://localhost:3000/api/caixa/${id}`, {
+            const res = await fetch(`http://localhost:3000/api/caixa/${caixa._id}`, {
                 method: 'PUT',
                 headers: {
                     Accept: 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(form)
+                body: JSON.stringify(bodyUpdate())
             });
+            console.log('res');
+            console.log(res);
         } catch (err) {
             console.error(err);
         }
     };
-
 
     return (
         <Container>
@@ -79,15 +111,13 @@ export default function newMovimentacao({ caixa, categorias }) {
                 <Card.Header>
                     <Card.Title>Nova movimentação</Card.Title>
                 </Card.Header>
-                {/* <Row noGutters > */}
-                {/* </Row> */}
                 <Card.Body>
                     <Card.Subtitle>
                         Preencha os dados do formulário para adicionar um movimento para o seu
-                        caixa.
+                        caixa. Campos com * são obrigatórios.
                     </Card.Subtitle>
 
-                    <Form onSubmit={handleSubmit}>
+                    <Form onSubmit={handleSubmit} style={{ marginTop: '15px' }}>
                         <Row className="justify-content-start ml-auto">
                             <Form.Group controlId="formMove">
                                 <Form.Control
@@ -96,30 +126,33 @@ export default function newMovimentacao({ caixa, categorias }) {
                                     onChange={handleChange}
                                     isInvalid={errors.categoria}
                                     isValid={form.categoria}>
-                                    {categorias.map(cat => 
-                                        <option key={cat._id} value={cat.name}>{cat.name}</option>
-                                    )}
+                                    {categorias.map((cat) => (
+                                        <option key={cat._id} value={cat._id}>
+                                            {cat.name}
+                                        </option>
+                                    ))}
                                 </Form.Control>
                                 <Form.Control.Feedback type="invalid">
                                     {errors.categoria}
                                 </Form.Control.Feedback>
                                 <Form.Text className="text-muted">
-                                    Selecione a categoria.
-                                        </Form.Text>
-                                    <Form.Control
-                                        name="descricao"
-                                        type="text"
-                                        placeholder="Descrição"
-                                        onChange={handleChange}
-                                        isInvalid={errors.descricao}
-                                        isValid={form.descricao}></Form.Control>
-                                    <Form.Control.Feedback type="invalid">
-                                        {errors.descricao}
-                                    </Form.Control.Feedback>
-                                    <Form.Text className="text-muted">
-                                        Insira uma descrição para a movimentação.
-                                        </Form.Text>
-                                <Row>
+                                    Selecione a categoria, se alguma foi cadastrada no sistema.
+                                </Form.Text>
+                                <Form.Control
+                                    name="descricao"
+                                    type="text"
+                                    placeholder="Descrição"
+                                    onChange={handleChange}
+                                    isInvalid={errors.descricao}
+                                    isValid={form.descricao}
+                                    style={{ marginTop: '15px' }}></Form.Control>
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.descricao}
+                                </Form.Control.Feedback>
+                                <Form.Text className="text-muted">
+                                    * Insira uma descrição para a movimentação.
+                                </Form.Text>
+                                <Row style={{ marginTop: '15px' }}>
                                     <Col>
                                         <Form.Control
                                             as="select"
@@ -127,14 +160,14 @@ export default function newMovimentacao({ caixa, categorias }) {
                                             onChange={handleChange}
                                             isInvalid={errors.tipo}
                                             isValid={form.tipo}>
-                                            <option>ENTRADA</option>
-                                            <option>SAÍDA</option>
+                                            <option value="ENTRADA">ENTRADA</option>
+                                            <option value="SAÍDA">SAÍDA</option>
                                         </Form.Control>
                                         <Form.Control.Feedback type="invalid">
                                             {errors.tipo}
                                         </Form.Control.Feedback>
                                         <Form.Text className="text-muted">
-                                            Selecione o tipo de movimentação.
+                                            * Selecione o tipo de movimentação.
                                         </Form.Text>
                                     </Col>
                                     <Col>
@@ -142,15 +175,16 @@ export default function newMovimentacao({ caixa, categorias }) {
                                             name="valor"
                                             type="number"
                                             step="0.01"
+                                            min="0"
                                             placeholder="R$ 00.00"
                                             onChange={handleChange}
                                             isInvalid={errors.valor}
                                             isValid={form.valor}></Form.Control>
                                         <Form.Control.Feedback type="invalid">
-                                            {errors.tipo}
+                                            {errors.valor || errors.notOnlyNumbers}
                                         </Form.Control.Feedback>
                                         <Form.Text className="text-muted">
-                                            Digite o valor da movimentação.
+                                            * Digite o valor da movimentação.
                                         </Form.Text>
                                     </Col>
                                 </Row>
@@ -162,33 +196,37 @@ export default function newMovimentacao({ caixa, categorias }) {
                             </Button>
                         </Row>
                     </Form>
-                    <Row className="justify-content-center">
-                        <Alert
-                            show={showAlert}
-                            dismissible
-                            style={{ marginTop: 30 }}
-                            variant="success"
-                            onClose={() => setShowAlert(false)}>
-                            A movimentação foi cadastrada com sucesso!{' '}
-                        </Alert>
-                    </Row>
                 </Card.Body>
             </Card>
+            <Row className="justify-content-center">
+                <Alert
+                    show={showAlert}
+                    dismissible
+                    style={{ marginTop: 30 }}
+                    variant="success"
+                    onClose={() => setShowAlert(false)}>
+                    A movimentação foi cadastrada com sucesso!{' '}
+                    <Link href="http://localhost:3000/caixa/5f7b7eab23f46a3506c76d2c">
+                        Clique aqui
+                    </Link>{' '}
+                    para vê-lo na lista de registros!
+                </Alert>
+            </Row>
         </Container>
     );
 }
 
-newMovimentacao.getInitialProps = async ({ query: {id} }) => {
-    const res = await fetch(`http://localhost:3000/api/caixa/${id}`)
-    const caixaJson = await res.json()
+newMovimentacao.getInitialProps = async ({ query: { id } }) => {
+    const res = await fetch(`http://localhost:3000/api/caixa/${id}`);
+    const caixaJson = await res.json();
 
-    const categoriaRes = await fetch('http://localhost:3000/api/categorias')
-    const { data } = await categoriaRes.json()
+    const categoriaRes = await fetch('http://localhost:3000/api/categorias');
+    const { data } = await categoriaRes.json();
 
-    console.log(caixaJson.data)
+    console.log(caixaJson.data);
 
     return {
         caixa: caixaJson.data,
         categorias: data
-    }
-}
+    };
+};

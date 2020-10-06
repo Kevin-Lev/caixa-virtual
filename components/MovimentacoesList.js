@@ -2,7 +2,7 @@ import { Table, Container, Row } from 'react-bootstrap';
 import moment from 'moment';
 
 const MovimentacoesList = ({ caixa }) => (
-    <Container style={{ marginTop: 120, marginBottom: '20%', width: '60%' }}>
+    <Container style={{ marginTop: 120, marginBottom: '20%', width: '80%' }}>
         <Row className="justify-content-center">
             <h4>Lista de movimentações do caixa</h4>
         </Row>
@@ -37,8 +37,8 @@ const MovimentacoesList = ({ caixa }) => (
                             <td>{row.tipo}</td>
                             <td>{row.descricao}</td>
                             <td>{row.valor}</td>
-                            <td>{row.categoria._id}</td>
-                            <td>{row.categoria.name}</td>
+                            <td>{row.categoria ? row.categoria._id : 'Sem categoria'}</td>
+                            <td>{row.categoria ? row.categoria.name : 'Sem categoria'}</td>
                             <td>{moment(row.data).format('DD-MM-YYYY HH:MM')}</td>
                         </tr>
                     </tbody>

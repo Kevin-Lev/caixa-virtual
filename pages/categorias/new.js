@@ -11,6 +11,7 @@ export default function NewCategoria() {
     useEffect(() => {
         if (isSubmitting) {
             if (Object.keys(errors).length === 0) {
+                console.log('USE EFFECT');
                 createCategoria();
                 setIsSubmitting(false);
             }
@@ -47,7 +48,7 @@ export default function NewCategoria() {
 
     const createCategoria = async () => {
         try {
-            const res = await fetch('http://localhost:3000/api/categoria', {
+            const res = await fetch('http://localhost:3000/api/categorias', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',

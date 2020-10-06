@@ -15,7 +15,7 @@ const Header = () => (
                 <Nav className="ml-auto">
                     <NavDropdown title="Opções do usuário" id="collasible-nav-dropdown">
                         <NavDropdown.Item style={{ paddingLeft: 7 }}>
-                            <Link href="/ceps/new">
+                            <Link href="/caixa/5f7b7eab23f46a3506c76d2c/newMovimentacao">
                                 <a style={{ color: 'black' }}>Simular movimentação</a>
                             </Link>
                         </NavDropdown.Item>
