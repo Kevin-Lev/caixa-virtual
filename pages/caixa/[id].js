@@ -10,7 +10,9 @@ export default function MovimentaList({ caixa }) {
 }
 
 MovimentaList.getInitialProps = async ({ query: { id } }) => {
+    console.log(id)
     const res = await fetch(`http://localhost:3000/api/caixa/${id}`);
+    console.log(res)
     const { data } = await res.json();
 
     // Para buscar id e nome da categoria de cada movimentação feita

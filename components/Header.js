@@ -3,7 +3,10 @@ import Link from 'next/link';
 
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
-const Header = () => (
+const Header = ( userId ) => {
+    console.log('userId HEADER')
+    console.log(userId)
+return (
     <div style={{ marginBottom: '5%' }}>
         <Head>
             <title>vCaixa.dev - a sua Caixa Virtual!</title>
@@ -15,7 +18,7 @@ const Header = () => (
                 <Nav className="ml-auto">
                     <NavDropdown title="Opções do usuário" id="collasible-nav-dropdown">
                         <NavDropdown.Item style={{ paddingLeft: 7 }}>
-                            <Link href="/caixa/5f7b7eab23f46a3506c76d2c/newMovimentacao">
+                            <Link href={"/caixa/" + userId.userId + "/newMovimentacao"}>
                                 <a style={{ color: 'black' }}>Simular movimentação</a>
                             </Link>
                         </NavDropdown.Item>
@@ -27,7 +30,7 @@ const Header = () => (
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item>
-                            <Link href="/caixa/5f7b7eab23f46a3506c76d2c">
+                            <Link href={"/caixa/" + userId.userId}>
                                 <a style={{ color: 'black' }}>Lista de registros</a>
                             </Link>
                         </NavDropdown.Item>
@@ -37,5 +40,6 @@ const Header = () => (
         </Navbar>
     </div>
 );
+}
 
 export default Header;
