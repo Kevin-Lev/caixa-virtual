@@ -55,7 +55,7 @@ export default function NewCategoria() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(form)
-            });            
+            });
         } catch (err) {
             console.error(err);
         }

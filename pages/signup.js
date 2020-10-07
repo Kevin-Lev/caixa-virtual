@@ -1,72 +1,124 @@
-import React, { useState } from 'react';
-import Router from 'next/router';
+import React, { useState, useEffect } from 'react';
 import cookie from 'js-cookie';
-
+import { Container, Row, Button, Form, Alert } from 'react-bootstrap';
+import Link from 'next/link';
 
 const Signup = () => {
+    const [form, setForm] = useState({ email: '', password: '' });
     const [signupError, setSignupError] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [errors, setErrors] = useState({});
+    const [showAlert, setShowAlert] = useState(false);
+
+    useEffect(() => {
+        if (isSubmitting) {
+            if (Object.keys(errors).length === 0) {
+                execSignup();
+                setIsSubmitting(false);
+                setShowAlert(true);
+            }
+        }
+    });
 
     function handleSubmit(e) {
         e.preventDefault();
+        let errs = validate();
+        setErrors(errs);
+        setIsSubmitting(true);
+    }
 
+    const execSignup = async () => {
         fetch('/api/usuarios', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                email,
-                password
-            }),
+                email: form.email,
+                password: form.password
+            })
         })
             .then((r) => r.json())
             .then((data) => {
-                console.log('data SIGNUP')
-                console.log(data)
                 if (data && data.error) {
                     setSignupError(data.message);
                 }
                 if (data && data.token) {
                     //set cookie
                     cookie.set('token', data.token, { expires: 15 });
-                    Router.push('/login');
                 }
             });
-    }
+    };
 
+    const validate = () => {
+        let err = {};
+
+        if (!form.email) {
+            err.email = 'Você precisa inserir o seu e-mail.';
+        }
+
+        if (!form.password) {
+            err.password = 'Você precisa inserir uma senha.';
+        }
+
+        return err;
+    };
+
+    const handleChange = (event) => {
+        setForm({
+            ...form,
+            [event.target.name]: event.target.value
+        });
+    };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <p>Sign Up</p>
-            <label htmlFor="email">
-                email
-        <input
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    name="email"
-                    type="email"
-                />
-            </label>
-
-            <br />
-
-            <label for="password">
-                password
-        <input
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    name="password"
-                    type="password"
-                />
-            </label>
-
-            <br />
-
-            <input type="submit" value="Submit" />
-            {signupError && <p style={{ color: 'red' }}>{signupError}</p>}
-        </form>
+        <Container style={{ marginTop: 170, marginBottom: 170 }}>
+            <Row className="justify-content-center">
+                <Form onSubmit={handleSubmit}>
+                    <h4 style={{ textAlign: 'center' }}>Cadastro de Usuário</h4>
+                    <Form.Group controlId="formCat">
+                        <Form.Control
+                            type="email"
+                            placeholder="E-mail"
+                            name="email"
+                            onChange={handleChange}
+                            isInvalid={errors.email || signupError}
+                            isValid={form.email && !signupError}
+                        />
+                        <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
+                        <Form.Text className="text-muted">Digite o seu e-mail.</Form.Text>
+                        <Form.Control
+                            type="password"
+                            placeholder="Senha"
+                            name="password"
+                            onChange={handleChange}
+                            isInvalid={errors.password || signupError}
+                            isValid={form.password && !signupError}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                            {errors.password || signupError}
+                        </Form.Control.Feedback>
+                        <Form.Text className="text-muted">Digite a sua senha.</Form.Text>
+                    </Form.Group>
+                    <Row className="justify-content-center">
+                        <Button variant="success" type="submit">
+                            Cadastrar usuário
+                        </Button>
+                    </Row>
+                </Form>
+            </Row>
+            <Row className="justify-content-center">
+                <Alert
+                    show={showAlert}
+                    dismissible
+                    style={{ marginTop: 30 }}
+                    variant="success"
+                    onClose={() => setShowAlert(false)}>
+                    Você foi cadastrado com sucesso! <Link href="/login">Clique aqui</Link> para
+                    fazer o seu login!
+                </Alert>
+            </Row>
+        </Container>
     );
 };
 

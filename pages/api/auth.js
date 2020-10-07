@@ -1,5 +1,4 @@
 import Usuario from '../../models/Usuario';
-
 import dbConnect from '../../util/dbConnect';
 
 dbConnect();
@@ -43,26 +42,21 @@ export default (req, res) => {
             } else {
                 authUser(email, password, user.password, function (err, match) {
                     if (err) {
-                        res.status(500).json({ error: true, message: 'Falha na autenticação' });
+                        res.status(500).json({ error: true, message: 'Falha na autenticação.' });
                     }
                     if (match) {
-                        const token = jwt.sign(
-                            { userId: user._id, email: user.email },
-                            jwtSecret,
-                            {
-                                expiresIn: 3000, //50 minutos
-                            },
-                        );
+                        const token = jwt.sign({ userId: user._id, email: user.email }, jwtSecret, {
+                            expiresIn: 3000 //50 minutos
+                        });
                         res.status(200).json({ token });
                         return;
                     } else {
-                        res.status(401).json({ error: true, message: 'Falha na autenticação' });
+                        res.status(401).json({ error: true, message: 'Senha incorreta.' });
                         return;
                     }
                 });
             }
         });
-
     } else {
         // Handle any other HTTP method
         res.statusCode = 401;

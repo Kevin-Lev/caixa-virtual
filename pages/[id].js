@@ -2,10 +2,10 @@ import Link from 'next/link';
 import { Jumbotron, Button, Container, Row, Col } from 'react-bootstrap';
 import Header from '../components/Header';
 
-export default function Home( id ) {
-    console.log('id HOME')
-    console.log(id.id)
-    const userId = id.id
+export default function Home(id) {
+    console.log('id HOME');
+    console.log(id.id);
+    const userId = id.id;
     return (
         <>
             <Header userId={userId} />
@@ -27,13 +27,10 @@ export default function Home( id ) {
             </Row> */}
                 </Jumbotron>
             </Container>
-            </>
+        </>
     );
 }
 
-Home.getInitialProps = async ({ query: id  }) => {
-
-    return id
+Home.getInitialProps = async ({ query: id }) => {
+    return id;
 };
-
-

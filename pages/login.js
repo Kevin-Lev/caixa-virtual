@@ -16,7 +16,7 @@ const Login = () => {
     useEffect(() => {
         if (isSubmitting) {
             if (Object.keys(errors).length === 0) {
-                execLogin()
+                execLogin();
                 setIsSubmitting(false);
             }
         }
@@ -26,12 +26,12 @@ const Login = () => {
         await fetch('/api/auth', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 email: form.email,
-                password: form.password,
-            }),
+                password: form.password
+            })
         })
             .then((r) => {
                 return r.json();
@@ -43,13 +43,13 @@ const Login = () => {
                 if (data && data.token) {
                     //set cookie
                     cookie.set('token', data.token, { expires: 15 });
-                    const token = data.token.split(' ')
-                    const decodedToken = jwt.verify(token[0], jwtSecret)
-                    console.log(decodedToken)
+                    const token = data.token.split(' ');
+                    const decodedToken = jwt.verify(token[0], jwtSecret);
+                    console.log(decodedToken);
                     Router.push(`/${decodedToken.userId}`);
                 }
             });
-    }
+    };
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -81,7 +81,6 @@ const Login = () => {
     };
 
     return (
-
         <Container style={{ marginTop: 170, marginBottom: 170 }}>
             <Row className="justify-content-center">
                 <Form onSubmit={handleSubmit}>
@@ -95,12 +94,8 @@ const Login = () => {
                             isInvalid={errors.email || loginError}
                             isValid={form.email && !loginError}
                         />
-                        <Form.Control.Feedback type="invalid">
-                            {errors.email}
-                        </Form.Control.Feedback>
-                        <Form.Text className="text-muted">
-                            Digite o seu e-mail.
-                            </Form.Text>
+                        <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
+                        <Form.Text className="text-muted">Digite o seu e-mail.</Form.Text>
                         <Form.Control
                             type="password"
                             placeholder="Senha"
@@ -112,22 +107,18 @@ const Login = () => {
                         <Form.Control.Feedback type="invalid">
                             {errors.password || loginError}
                         </Form.Control.Feedback>
-                        <Form.Text className="text-muted">
-                            Digite a sua senha.
-                            </Form.Text>
+                        <Form.Text className="text-muted">Digite a sua senha.</Form.Text>
                     </Form.Group>
                     <Row className="justify-content-center">
                         <Button variant="success" type="submit">
                             Login
-                            </Button>
+                        </Button>
                     </Row>
                 </Form>
             </Row>
             <Row className="justify-content-center" style={{ marginTop: '15px' }}>
                 <Link href="/signup">
-                    <Button variant="primary">
-                        Cadastre-se
-                    </Button>
+                    <Button variant="primary">Cadastre-se</Button>
                 </Link>
             </Row>
         </Container>
