@@ -23,8 +23,8 @@ export default (req, res) => {
     if (req.method === 'POST') {
         //login
         try {
-            assert.notEqual(null, req.body.email, 'Email necessário');
-            assert.notEqual(null, req.body.password, 'Senha necessária');
+            assert.notStrictEqual(null, req.body.email, 'Email necessário');
+            assert.notStrictEqual(null, req.body.password, 'Senha necessária');
         } catch (bodyError) {
             res.status(403).send(bodyError.message);
         }

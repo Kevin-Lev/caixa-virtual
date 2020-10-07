@@ -27,7 +27,7 @@ async function createUser(email, password, callback) {
                 caixa
             },
             function (err, userCreated) {
-                assert.equal(err, null);
+                assert.strictEqual(err, null);
                 callback(userCreated);
             },
         );
@@ -58,7 +58,7 @@ const newBodyCaixa = () => {
     const caixa = {}
 
     caixa._id = mongoose.Types.ObjectId()
-    caixa.saldoTotal = 6000
+    caixa.saldoTotal = 0
     caixa.movimentacoes = []
 
     console.log('CAIXA ID')
@@ -72,8 +72,8 @@ export default (req, res) => {
     if (req.method === 'POST') {
         // signup
         try {
-            assert.notEqual(null, req.body.email, 'Email é necessário');
-            assert.notEqual(null, req.body.password, 'Senha é necessária');
+            assert.notStrictEqual(null, req.body.email, 'Email é necessário');
+            assert.notStrictEqual(null, req.body.password, 'Senha é necessária');
         } catch (bodyError) {
             res.status(403).json({ error: true, message: bodyError.message });
         }
