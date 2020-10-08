@@ -48,7 +48,7 @@ export default function NewCategoria() {
 
     const createCategoria = async () => {
         try {
-            const res = await fetch('${process.env.API_URL}/api/categorias', {
+            const res = await fetch(`${process.env.API_URL}/api/categorias`, {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
