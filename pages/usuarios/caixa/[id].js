@@ -1,4 +1,4 @@
-import MovimentacoesList from '../../components/MovimentacoesList';
+import MovimentacoesList from '../../../components/MovimentacoesList';
 import fetch from 'isomorphic-unfetch';
 
 export default function MovimentaList({ caixa }) {
@@ -10,9 +10,7 @@ export default function MovimentaList({ caixa }) {
 }
 
 MovimentaList.getInitialProps = async ({ query: { id } }) => {
-    console.log(id);
     const res = await fetch(`http://localhost:3000/api/caixa/${id}`);
-    console.log(res);
     const { data } = await res.json();
 
     // Para buscar id e nome da categoria de cada movimentação feita
@@ -27,6 +25,7 @@ MovimentaList.getInitialProps = async ({ query: { id } }) => {
     }
 
     return {
-        caixa: data
+        caixa: data,
+        idCaixa: data._id
     };
 };

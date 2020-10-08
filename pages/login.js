@@ -7,7 +7,7 @@ import Link from 'next/link';
 const jwt = require('jsonwebtoken');
 const jwtSecret = 'SUPERSECRETE20220';
 
-const Login = () => {
+const Login = (hide) => {
     const [form, setForm] = useState({ email: '', password: '' });
     const [loginError, setLoginError] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,17 +36,17 @@ const Login = () => {
             .then((r) => {
                 return r.json();
             })
-            .then((data) => {
+            .then(async (data) => {
                 if (data && data.error) {
                     setLoginError(data.message);
                 }
                 if (data && data.token) {
                     //set cookie
-                    cookie.set('token', data.token, { expires: 15 });
+                    cookie.set('token', data.token, { expires: 2147483647 });
                     const token = data.token.split(' ');
                     const decodedToken = jwt.verify(token[0], jwtSecret);
                     console.log(decodedToken);
-                    Router.push(`/${decodedToken.userId}`);
+                    Router.push(`/usuarios/${decodedToken.userId}`);
                 }
             });
     };
@@ -122,24 +122,13 @@ const Login = () => {
                 </Link>
             </Row>
         </Container>
-        // <form onSubmit={handleSubmit}>
-        //     <p>Login</p>
-        //     <input
-        //         name="email"
-        //         type="email"
-        //         value={email}
-        //         onChange={(e) => setEmail(e.target.value)}
-        //     />
-        //     <input
-        //         name="password"
-        //         type="password"
-        //         value={password}
-        //         onChange={(e) => setPassword(e.target.value)}
-        //     />
-        //     <input type="submit" value="Submit" />
-        //     {loginError && <p style={{ color: 'red' }}>{loginError}</p>}
-        // </form>
     );
 };
 
 export default Login;
+
+Login.getInitialProps = () => {
+    return {
+        hide: true
+    };
+};

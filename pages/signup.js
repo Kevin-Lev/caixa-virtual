@@ -3,7 +3,7 @@ import cookie from 'js-cookie';
 import { Container, Row, Button, Form, Alert } from 'react-bootstrap';
 import Link from 'next/link';
 
-const Signup = () => {
+const Signup = (hide) => {
     const [form, setForm] = useState({ email: '', password: '' });
     const [signupError, setSignupError] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -45,7 +45,7 @@ const Signup = () => {
                 }
                 if (data && data.token) {
                     //set cookie
-                    cookie.set('token', data.token, { expires: 15 });
+                    cookie.set('token', data.token, { expires: 150 });
                 }
             });
     };
@@ -105,6 +105,13 @@ const Signup = () => {
                             Cadastrar usuário
                         </Button>
                     </Row>
+                    <Row className="justify-content-center">
+                        <Link href="/login">
+                            <Button variant="primary" style={{ marginTop: '15px' }}>
+                                Voltar para a tela de login
+                            </Button>
+                        </Link>
+                    </Row>
                 </Form>
             </Row>
             <Row className="justify-content-center">
@@ -123,3 +130,9 @@ const Signup = () => {
 };
 
 export default Signup;
+
+Signup.getInitialProps = () => {
+    return {
+        hide: true
+    };
+};

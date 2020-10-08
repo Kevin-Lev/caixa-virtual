@@ -206,10 +206,8 @@ export default function newMovimentacao({ caixa, categorias }) {
                     variant="success"
                     onClose={() => setShowAlert(false)}>
                     A movimentação foi cadastrada com sucesso!{' '}
-                    <Link href="http://localhost:3000/caixa/5f7b7eab23f46a3506c76d2c">
-                        Clique aqui
-                    </Link>{' '}
-                    para vê-lo na lista de registros!
+                    <Link href={`/usuarios/caixa/${caixa._id}`}>Clique aqui</Link> para vê-lo na
+                    lista de registros!
                 </Alert>
             </Row>
         </Container>
@@ -223,9 +221,8 @@ newMovimentacao.getInitialProps = async ({ query: { id } }) => {
     const categoriaRes = await fetch('http://localhost:3000/api/categorias');
     const { data } = await categoriaRes.json();
 
-    console.log(caixaJson.data);
-
     return {
+        idCaixa: caixaJson.data._id,
         caixa: caixaJson.data,
         categorias: data
     };
