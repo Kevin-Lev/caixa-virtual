@@ -4,7 +4,10 @@ import moment from 'moment';
 const MovimentacoesList = ({ caixa }) => (
     <Container style={{ marginTop: 120, marginBottom: '20%', width: '80%' }}>
         <Row className="justify-content-center">
-            <h4>Lista de movimentações do caixa</h4>
+            <h4>Lista de movimentações do dia</h4>
+        </Row>
+        <Row className="justify-content-center">
+            <h6>Emitida em: {moment(Date.now()).format('DD-MM-YYYY HH:MM')}</h6>
         </Row>
         <Row className="justify-content-center">
             <Table
@@ -17,29 +20,27 @@ const MovimentacoesList = ({ caixa }) => (
                 variant="dark">
                 <thead>
                     <tr>
-                        {/* <th>ID</th> */}
-                        <th>ID da movimentação</th>
                         <th>Saldo total</th>
-                        <th>Tipo</th>
-                        <th>Descrição</th>
-                        <th>Valor</th>
+                        <th>Data</th>
+                        <th>ID da movimentação</th>
                         <th>ID da Categoria</th>
                         <th>Nome da Categoria</th>
-                        <th>Data</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                        <th>Descrição</th>
                     </tr>
                 </thead>
                 {caixa.movimentacoes.map((row) => (
                     <tbody key={row.id}>
                         <tr>
-                            {/* <td>{caixa._id}</td> */}
-                            <td>{row.id}</td>
                             <td>{caixa.saldoTotal}</td>
-                            <td>{row.tipo}</td>
-                            <td>{row.descricao}</td>
-                            <td>{row.valor}</td>
+                            <td>{moment(row.data).format('DD-MM-YYYY HH:MM')}</td>
+                            <td>{row.id}</td>
                             <td>{row.categoria ? row.categoria._id : 'Sem categoria'}</td>
                             <td>{row.categoria ? row.categoria.name : 'Sem categoria'}</td>
-                            <td>{moment(row.data).format('DD-MM-YYYY HH:MM')}</td>
+                            <td>{row.tipo}</td>
+                            <td>{row.valor}</td>
+                            <td>{row.descricao}</td>
                         </tr>
                     </tbody>
                 ))}

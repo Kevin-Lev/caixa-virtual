@@ -13,17 +13,6 @@ MovimentaList.getInitialProps = async ({ query: { id } }) => {
     const res = await fetch(`${process.env.API_URL}/api/caixa/${id}`);
     const { data } = await res.json();
 
-    // Para buscar id e nome da categoria de cada movimentação feita
-    // for (let i = 0; i < data.movimentacoes.length; i++) {
-    //     const categoriaRes = await fetch(
-    //         `${process.env.API_URL}/api/categorias/${data.movimentacoes[i].categoria}`
-    //     );
-
-    //     const catJson = await categoriaRes.json();
-
-    //     data.movimentacoes[i].categoria = catJson.data;
-    // }
-
     return {
         caixa: data,
         idCaixa: data._id
