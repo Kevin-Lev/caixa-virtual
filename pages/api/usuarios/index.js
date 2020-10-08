@@ -32,7 +32,6 @@ async function createUser(email, password, callback) {
             }
         );
     });
-    console.log('usuário criado com sucesso!');
 }
 
 const createCaixa = async () => {
@@ -61,9 +60,6 @@ const newBodyCaixa = () => {
     caixa.saldoTotal = 0;
     caixa.movimentacoes = [];
 
-    console.log('CAIXA ID');
-    console.log(caixa._id);
-
     return caixa;
 };
 
@@ -86,11 +82,8 @@ export default (req, res) => {
                 return;
             }
             if (!user) {
-                console.log('email nao existe');
                 // procede para a criação de usuário
                 createUser(email, password, function (creationResult) {
-                    console.log('creationResult');
-                    console.log(creationResult);
                     if (
                         !(
                             Object.keys(creationResult).length === 0 &&
@@ -98,11 +91,9 @@ export default (req, res) => {
                         )
                     ) {
                         const user = creationResult;
-                        console.log('token');
                         const token = jwt.sign({ userId: user._id, email: user.email }, jwtSecret, {
                             expiresIn: 3000 //50 minutos
                         });
-                        console.log(token);
                         res.status(200).json({ token });
                         return;
                     }

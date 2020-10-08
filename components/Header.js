@@ -3,17 +3,20 @@ import Link from 'next/link';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 const Header = (props) => {
-    console.log('userId HEADER');
-    console.log(props);
-
     return (
         <div style={{ marginBottom: '5%' }}>
             <Head>
                 <title>vCaixa.dev - a sua Caixa Virtual!</title>
             </Head>
             <Navbar fixed="top" collapseOnSelect expand="lg" bg="primary" variant="dark">
-                <Navbar.Brand>Caixa Virtual</Navbar.Brand>
-                <Navbar.Toggle hidden={props.hide ? true : false} aria-controls="responsive-navbar-nav" />
+                <Navbar.Brand>
+                    <img height="25" src='/cash-register.png' style={{ marginRight: '10px' }} />
+                    Caixa Virtual
+                </Navbar.Brand>
+                <Navbar.Toggle
+                    hidden={props.hide ? true : false}
+                    aria-controls="responsive-navbar-nav"
+                />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ml-auto">
                         <NavDropdown

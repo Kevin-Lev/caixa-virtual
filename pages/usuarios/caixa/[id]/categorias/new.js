@@ -11,7 +11,6 @@ export default function NewCategoria() {
     useEffect(() => {
         if (isSubmitting) {
             if (Object.keys(errors).length === 0) {
-                console.log('USE EFFECT');
                 createCategoria();
                 setIsSubmitting(false);
             }

@@ -45,7 +45,6 @@ const Login = (hide) => {
                     cookie.set('token', data.token, { expires: 2147483647 });
                     const token = data.token.split(' ');
                     const decodedToken = jwt.verify(token[0], jwtSecret);
-                    console.log(decodedToken);
                     Router.push(`/usuarios/${decodedToken.userId}`);
                 }
             });

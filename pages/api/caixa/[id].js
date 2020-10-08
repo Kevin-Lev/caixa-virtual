@@ -5,8 +5,8 @@ import moment from 'moment';
 
 dbConnect();
 
-const isMovimentacaoDia = (mov) => moment(mov.data).format("YYYY-MM-DD") === moment().format("YYYY-MM-DD")
-
+const isMovimentacaoDia = (mov) =>
+    moment(mov.data).format('YYYY-MM-DD') === moment().format('YYYY-MM-DD');
 
 export default async (req, res) => {
     const {
@@ -17,7 +17,7 @@ export default async (req, res) => {
     switch (method) {
         case 'GET':
             try {
-                let caixa = await Caixa.findById(id)
+                let caixa = await Caixa.findById(id);
 
                 if (!caixa) {
                     return res.status(400).json({ success: false });
@@ -26,12 +26,12 @@ export default async (req, res) => {
                 // Filtrar quais são as movimentações do dia
                 for (let i = 0; i < caixa.movimentacoes.length; i++) {
                     if (!isMovimentacaoDia(caixa.movimentacoes[i])) {
-                        caixa.movimentacoes.splice(i, 1)
-                        i -= 1
-                        continue
+                        caixa.movimentacoes.splice(i, 1);
+                        i -= 1;
+                        continue;
                     }
 
-                    const cat = await Categoria.findById(caixa.movimentacoes[i].categoria)
+                    const cat = await Categoria.findById(caixa.movimentacoes[i].categoria);
 
                     caixa.movimentacoes[i].categoria = cat;
                 }

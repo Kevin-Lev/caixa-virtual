@@ -25,7 +25,6 @@ export default function newMovimentacao({ caixa, categorias }) {
     });
 
     const handleSubmit = (event) => {
-        console.log('HANDLE SUBMIT');
         event.preventDefault();
         let errs = validate();
         setErrors(errs);
@@ -36,7 +35,6 @@ export default function newMovimentacao({ caixa, categorias }) {
     };
 
     const handleChange = (event) => {
-        console.log(event.target.value);
         setForm({
             ...form,
             [event.target.name]: event.target.value
@@ -58,8 +56,6 @@ export default function newMovimentacao({ caixa, categorias }) {
     };
 
     const bodyUpdate = () => {
-        console.log(typeof caixa.saldoTotal);
-        console.log(typeof form.valor);
 
         if (form.tipo === 'ENTRADA') {
             caixa.saldoTotal += parseFloat(form.valor);
@@ -75,8 +71,6 @@ export default function newMovimentacao({ caixa, categorias }) {
             descricao: form.descricao
         });
 
-        console.log('updatedCaixa');
-        console.log(caixa);
         return caixa;
     };
 
@@ -93,8 +87,6 @@ export default function newMovimentacao({ caixa, categorias }) {
                 },
                 body: JSON.stringify(bodyUpdate())
             });
-            console.log('res');
-            console.log(res);
         } catch (err) {
             console.error(err);
         }
