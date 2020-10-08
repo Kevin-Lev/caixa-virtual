@@ -7,9 +7,11 @@
         "build": "next build",
         "start": "next start",
         "lint": "eslint --fix .",
-        "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
+        "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
+        "export": "next export -o dist"
     },
     "dependencies": {
+        "aws-sdk": "^2.769.0",
         "bcrypt": "^5.0.0",
         "bootstrap": "^4.5.2",
         "isomorphic-unfetch": "^3.0.0",

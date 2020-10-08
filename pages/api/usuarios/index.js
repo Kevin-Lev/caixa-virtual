@@ -39,7 +39,7 @@ const createCaixa = async () => {
     try {
         const newCaixa = newBodyCaixa();
 
-        const res = await fetch('http://localhost:3000/api/caixa', {
+        const res = await fetch(`${process.env.API_URL}/api/caixa`, {
             method: 'POST',
             headers: {
                 Accept: 'application/json',

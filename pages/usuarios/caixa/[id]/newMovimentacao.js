@@ -72,7 +72,6 @@ export default function newMovimentacao({ caixa, categorias }) {
         }
 
         caixa.movimentacoes.push({
-            data: Date.now(),
             id: idGenerator(),
             categoria: form.categoria,
             tipo: form.tipo,
@@ -90,7 +89,7 @@ export default function newMovimentacao({ caixa, categorias }) {
 
     const createMovimentacao = async () => {
         try {
-            const res = await fetch(`http://localhost:3000/api/caixa/${caixa._id}`, {
+            const res = await fetch(`${process.env.API_URL}/api/caixa/${caixa._id}`, {
                 method: 'PUT',
                 headers: {
                     Accept: 'application/json',
@@ -215,10 +214,10 @@ export default function newMovimentacao({ caixa, categorias }) {
 }
 
 newMovimentacao.getInitialProps = async ({ query: { id } }) => {
-    const res = await fetch(`http://localhost:3000/api/caixa/${id}`);
+    const res = await fetch(`${process.env.API_URL}/api/caixa/${id}`);
     const caixaJson = await res.json();
 
-    const categoriaRes = await fetch('http://localhost:3000/api/categorias');
+    const categoriaRes = await fetch(`${process.env.API_URL}/api/categorias`);
     const { data } = await categoriaRes.json();
 
     return {

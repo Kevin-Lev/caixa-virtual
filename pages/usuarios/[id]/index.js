@@ -3,11 +3,7 @@ import { Jumbotron, Container, Row, Col } from 'react-bootstrap';
 import Header from '../../../components/Header';
 
 export default function Usuario(props) {
-    console.log('id Usuário');
-    console.log(props.id);
-    console.log('id Caixa');
-    console.log(props.idCaixa);
-
+    
     return (
         <>
             <Header {...props} />
@@ -34,8 +30,9 @@ export default function Usuario(props) {
 }
 
 Usuario.getInitialProps = async ({ query: id }) => {
-    const idUser = id.id;
-    const res = await fetch(`http://localhost:3000/api/usuarios/${idUser}`);
+
+    const idUser = id.id
+    const res = await fetch(`${process.env.API_URL}/api/usuarios/${idUser}`);
     const { data } = await res.json();
 
     console.log('data');
@@ -44,5 +41,5 @@ Usuario.getInitialProps = async ({ query: id }) => {
     return {
         id: data._id,
         idCaixa: data.caixa
-    };
+    }
 };

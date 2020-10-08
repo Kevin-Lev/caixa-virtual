@@ -48,7 +48,7 @@ export default function NewCategoria() {
 
     const createCategoria = async () => {
         try {
-            const res = await fetch('http://localhost:3000/api/categorias', {
+            const res = await fetch('${process.env.API_URL}/api/categorias', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -106,7 +106,7 @@ export default function NewCategoria() {
 }
 
 NewCategoria.getInitialProps = async ({ query: { id } }) => {
-    const res = await fetch(`http://localhost:3000/api/caixa/${id}`);
+    const res = await fetch(`${process.env.API_URL}/api/caixa/${id}`);
     const { data } = await res.json();
 
     return {

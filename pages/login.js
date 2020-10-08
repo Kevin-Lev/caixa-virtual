@@ -23,7 +23,7 @@ const Login = (hide) => {
     });
 
     const execLogin = async () => {
-        await fetch('/api/auth', {
+        await fetch(`${process.env.API_URL}/api/auth`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -3,15 +3,13 @@ const mongoose = require('mongoose');
 
 const CaixaSchema = new mongoose.Schema(
     {
-        // _id: {
-        //     type: ObjectID
-        // },
         saldoTotal: {
             type: Number,
             required: [true, 'Por favor, adicione um valor númerico para o saldo do seu caixa']
         },
         movimentacoes: [
             {
+                _id: false,
                 data: {
                     type: Date,
                     required: true,

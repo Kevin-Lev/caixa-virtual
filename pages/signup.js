@@ -28,7 +28,7 @@ const Signup = (hide) => {
     }
 
     const execSignup = async () => {
-        fetch('/api/usuarios', {
+        fetch(`${process.env.API_URL}/api/usuarios`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
