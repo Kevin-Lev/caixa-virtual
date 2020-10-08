@@ -13,7 +13,7 @@ const Header = (props) => {
             </Head>
             <Navbar fixed="top" collapseOnSelect expand="lg" bg="primary" variant="dark">
                 <Navbar.Brand>Caixa Virtual</Navbar.Brand>
-                <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                <Navbar.Toggle hidden={props.hide ? true : false} aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="ml-auto">
                         <NavDropdown

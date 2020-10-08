@@ -12,7 +12,6 @@ export default function newMovimentacao({ caixa, categorias }) {
         descricao: ''
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
-    // const [insertedMove, setInsertedMove] = useState('');
     const [errors, setErrors] = useState({});
     const [showAlert, setShowAlert] = useState(false);
 
@@ -31,7 +30,6 @@ export default function newMovimentacao({ caixa, categorias }) {
         let errs = validate();
         setErrors(errs);
         setIsSubmitting(true);
-        // setInsertedMove(form.name)
         if (Object.keys(errs).length === 0 && errs.constructor === Object) {
             setShowAlert(true);
         }
@@ -62,8 +60,6 @@ export default function newMovimentacao({ caixa, categorias }) {
     const bodyUpdate = () => {
         console.log(typeof caixa.saldoTotal);
         console.log(typeof form.valor);
-
-        // caixa.saldoTotal = parseFloat(caixa.saldoTotal)
 
         if (form.tipo === 'ENTRADA') {
             caixa.saldoTotal += parseFloat(form.valor);
@@ -106,7 +102,7 @@ export default function newMovimentacao({ caixa, categorias }) {
 
     return (
         <Container>
-            <Card border="dark">
+            <Card border="dark" style={{ marginTop: '90px' }}>
                 <Card.Header>
                     <Card.Title>Nova movimentação</Card.Title>
                 </Card.Header>
