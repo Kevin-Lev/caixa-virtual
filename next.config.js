@@ -6,6 +6,6 @@ module.exports = {
         API_URL:
             process.env.NODE_ENV === 'development'
                 ? 'http://localhost:3000'
-                : 'http://caixavirtual.s3-website-sa-east-1.amazonaws.com'
+                : 'https://caixa-virtual-six.vercel.app'
     }
 };
