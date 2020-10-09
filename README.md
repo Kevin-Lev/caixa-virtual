@@ -77,7 +77,7 @@ Foi feito o deploy desse projeto para o website [Vercel](https://vercel.com/kevi
 
 5.  Agora você poderá clicar em um desses 3 botões. Alternativamente, você pode selecionar as mesmas opções no botão **opções do usuário**, localizado no canto direito da NavBar.
 
-	-  *Simular uma  movimentação*: Permite simular uma nova movimentação para o  seu caixa.
+	-  *Adicionar uma  movimentação*: Permite adicionar uma nova movimentação para o  seu caixa.
 
 	- *Ver a lista de movimentações*:  Retorna uma tabela contendo o saldo do caixa do usuário e todas as suas movimentações realizadas no dia até o momento.
 
@@ -85,7 +85,7 @@ Foi feito o deploy desse projeto para o website [Vercel](https://vercel.com/kevi
 
 6. Primeiramente, selecione **Adicionar categoria** e aguarde para ser redirecionado. Em seguida, digite o nome desejado para a sua nova categoria e clique em **Cadastrar Categoria**. Uma mensagem de sucesso no cadastro aparecerá.
 
-7. Clique em **opções do usuário** e selecione *Simular movimentação*. Após ser redirecionado, preencha os dados do formulário e clique em **Cadastrar Movimentação**. Uma mensagem de sucesso deve aparecer se os dados inseridos estiverem corretos.
+7. Clique em **opções do usuário** e selecione *Adicionar movimentação*. Após ser redirecionado, preencha os dados do formulário e clique em **Cadastrar Movimentação**. Uma mensagem de sucesso deve aparecer se os dados inseridos estiverem corretos.
 
 8. Clique em **opções do usuário** e selecione *Lista de registros* para ver a movimentação que você acabou de inserir.. **Obs:** Lembre-se que só serão retornadas as movimentações cadastradas no dia em que a tabela é emitida.
 
@@ -97,7 +97,7 @@ Foi feito o deploy desse projeto para o website [Vercel](https://vercel.com/kevi
 	#Se estiver executando local em modo Dev
 		'https://localhost:3000/api/caixa/_id_da_caixa'
 
-		#Se estiver no site
+	#Se estiver no site
 		'https://caixa-virtual-six.vercel.app/api/caixa/_id_da_caixa''
 	```
 

@@ -6,7 +6,7 @@ const Header = (props) => {
     return (
         <div style={{ marginBottom: '5%' }}>
             <Head>
-                <title>vCaixa.dev - a sua Caixa Virtual!</title>
+                <title>vCaixa.dev - o seu Caixa Virtual!</title>
             </Head>
             <Navbar fixed="top" collapseOnSelect expand="lg" bg="primary" variant="dark">
                 <Navbar.Brand>
@@ -26,7 +26,7 @@ const Header = (props) => {
                             <NavDropdown.Item style={{ paddingLeft: 7 }}>
                                 <Link
                                     href={'/usuarios/caixa/' + props.idCaixa + '/newMovimentacao'}>
-                                    <a style={{ color: 'black' }}>Simular movimentação</a>
+                                    <a style={{ color: 'black' }}>Adicionar movimentação</a>
                                 </Link>
                             </NavDropdown.Item>
                             <NavDropdown.Divider />

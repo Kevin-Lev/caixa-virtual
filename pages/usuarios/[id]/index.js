@@ -12,7 +12,7 @@ export default function Usuario(props) {
                         <Col sm={4}>
                             <Link
                                 href={`${process.env.API_URL}/usuarios/caixa/${props.idCaixa}/newMovimentacao`}>
-                                <Button variant="success">Simular uma movimentação</Button>
+                                <Button variant="success">Adicionar uma movimentação</Button>
                             </Link>
                         </Col>
                         <Col sm={4}>

@@ -7,7 +7,7 @@ export default function Home(hide) {
             <Jumbotron>
                 <h1>Bem-vindo ao vCaixa.dev!</h1>
                 <h5>
-                    Além de ter o seu próprio caixa virtual, aqui você consegue simular
+                    Além de ter o seu próprio caixa virtual, aqui você consegue adicionar
                     movimentações e ver quais que aconteceram no dia de hoje. Se precisar, você
                     também pode adicionar novas categorias para as movimentações.
                 </h5>
