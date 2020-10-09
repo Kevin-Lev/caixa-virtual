@@ -40,8 +40,6 @@ O vCaixa.dev é um website desenvolvido pela *Virtual Box Company*, com o objeti
 
 -   **bcrypt** para a criptografia de senhas de usuários no momento de cadastro.
 
--   **isomorphic-unfetch** para realizar os fetches nos endpoints definidos na API.
-
 ## Instalação
 
 ```bash
@@ -123,6 +121,7 @@ Foi feito o deploy desse projeto para o website [Vercel](https://vercel.com/kevi
 ## Todo list
 
 - [x] Retornar saldo total e movimentações da caixa de um usuário.
+- [x] Design responsivo.
 - [x] Autenticação de usuário.
 - [x] Deploy do projeto no Vercel.com.
 - [x] Documentação de instalação e tutorial de uso do sistema.
