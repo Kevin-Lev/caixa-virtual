@@ -71,6 +71,8 @@ Foi feito o deploy desse projeto para o website [Vercel](https://vercel.com/kevi
 
 2. Caso não possua uma conta no sistema, clique no botão 'Quero me cadastrar'.
 
+![Alt text](/public/tela_inicial.png?raw=true "Tela Inicial")
+
 3. Digitte o seu e-mail e uma senha. Se  as suas credenciais estiverem corretas, aparecerá uma mensagem avisando do sucesso no cadastro.
 
 4. Volte para a tela de login e digite novamente as suas credencias. Clique no botão Login e aguarde até que você seja redirecionado.
