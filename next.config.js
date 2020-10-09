@@ -1,6 +1,5 @@
 module.exports = {
     env: {
-        // MONGO_DB: process.env.NODE_ENV === 'development' ? 'vCaixadev' : 'vCaixa',
         MONGO_URI: process.env.NODE_ENV === 'development' ? 
             `mongodb+srv://Kevin:teste@clustercep.zs0fs.mongodb.net/vCaixadev?retryWrites=true&w=majority` : `mongodb+srv://Kevin:teste@clustercep.zs0fs.mongodb.net/vCaixa?retryWrites=true&w=majority`,
         API_URL:

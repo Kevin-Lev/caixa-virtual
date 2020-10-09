@@ -1,4 +1,14 @@
-# vCaixa.dev - a sua Caixa Virtual
+# vCaixa.dev - o seu Caixa Virtual
+
+O vCaixa.dev é um website desenvolvido pela *Virtual Box Company*, com o objetivo de facilitar a administração de caixas dos mais diversos estabelecimentos. As suas principais **features** incluem:
+
+-	**Cadastro e autenticação de usuário**: o dono do estabelecimento faz o seu cadastro e em seguida, o sistema já cria um caixa para ele no banco de dados.
+
+- **Adição de movimentações**:  o dono pode inserir valores de entrada e saída no seu caixa, além de poder adicionar uma descrição e uma categoria para cada movimentação.
+
+- **Listagem de movimentações**:  O usuário pode visualizar a qualquer momento o saldo total do seu caixa, assim como todas as movimentações realizadas no dia.
+
+- **Adição de categorias**:  Para uma melhor organização do seu caixa, o dono pode inserir diversar categorias para atribuir para as várias entradas e saídas que acontecem no mesmo.
 
 ## Desenvolvimento
 
@@ -38,7 +48,7 @@ $ cd caixa-virtual/
 # instalar as dependências
 $ yarn install
 
-# executar server local em modo Dev
+# executar em modo Dev
 $ yarn dev
 
 # Realizar build para produção
@@ -48,7 +58,54 @@ $ yarn build
 $ yarn start
 
 ```
-
 ## Deploy
 
-Foi feito o deploy desse projeto para o website Vercel. Você pode visualizá-lo clicando [aqui](https://vercel.com/kevinlevroner/caixa-virtual){:target="\_blank rel="noopener"}.
+Foi feito o deploy desse projeto para o website [Vercel](https://vercel.com/kevinlevroner/caixa-virtual). Você pode visualizá-lo clicando [aqui](https://caixa-virtual-six.vercel.app/).
+
+## Tutorial de uso
+
+1. Execute o projeto em modo Dev e em seguida, digite 'localhost:3000' na barra de endereços. Alternativamente, acesse o projeto diretamente pelo seu [site](https://caixa-virtual-six.vercel.app/).
+
+2. Caso não possua uma conta no sistema, clique no botão 'Quero me cadastrar'.
+
+3. Digitte o seu e-mail e uma senha. Se  as suas credenciais estiverem corretas, aparecerá uma mensagem avisando do sucesso no cadastro.
+
+4. Volte para a tela de login e digite novamente as suas credencias. Clique no botão Login e aguarde até que você seja redirecionado.
+
+5.  Agora você poderá clicar em um desses 3 botões. Alternativamente, você pode selecionar as mesmas opções no botão **opções do usuário**, localizado no canto direito da NavBar.
+
+	  **Simular uma  movimentação:** Permite simular uma nova movimentação para o  seu caixa.
+
+	  **Ver a lista de movimentações:**  Retorna uma tabela contendo o saldo do caixa do usuário e todas as suas movimentações realizadas no dia até o momento.
+
+	  **Adicionar categoria:**  Permite adicionar categorias no banco de dados, para que o usuário consiga  selecionar uma delas no momento de criação de uma nova movimentação.
+
+6. Primeiramente, selecione **Adicionar categoria** e aguarde para ser redirecionado. Em seguida, digite o nome desejado para a sua nova categoria e clique em **Cadastrar Categoria**. Uma mensagem de sucesso no cadastro aparecerá.
+
+7. Clique em **opções do usuário** e selecione *Simular movimentação*. Após ser redirecionado, preencha os dados do formulário e clique em **Cadastrar Movimentação**. Uma mensagem de sucesso deve aparecer se os dados inseridos estiverem corretos.
+
+8. Clique em **opções do usuário** e selecione *Lista de registros* para ver a movimentação que você acabou de inserir.. **Obs:** Lembre-se que só serão retornadas as movimentações cadastradas no dia em que a tabela é emitida.
+
+9. Repita o **passo 6** para adicionar novas categorias para o seu caixa e o **passo 7** se quiser adicionar uma nova movimentação. Caso deseje sair da sessão, clique em **opções do usuário**, selecione *Sair* e aguarde o retorno para a página de Login.
+
+10. Se você desejar ver o .json contendo o saldo total e as movimentações da caixa do usuário autenticado sendo retornado diretamente, digite na barra de endereços:
+
+	```bash
+	#Se estiver executando local em modo Dev
+		'https://localhost:3000/api/caixa/_id_da_caixa'
+
+		#Se estiver no site
+		'https://caixa-virtual-six.vercel.app/api/caixa/_id_da_caixa''
+	```
+
+## Todo list
+
+- [x] Retornar saldo total e movimentações da caixa de um usuário.
+- [x] Autenticação de usuário.
+- [x] Deploy do projeto no Vercel.com.
+- [x] Documentação de instalação e tutorial de uso do sistema.
+- [ ] Testes Unitários.
+- [ ] Uso de Docker.
+- [ ] Melhorar a segurança da API e da autenticação de usuários.
+
+
