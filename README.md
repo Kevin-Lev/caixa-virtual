@@ -26,10 +26,13 @@ O vCaixa.dev é um website desenvolvido pela *Virtual Box Company*, com o objeti
 
 ### Banco de Dados Não Relacional
 
--   MongoDB
--   Atlas
+-   **MongoDB**:  Foram criados dois bancos de dados, um para desenvolvimento e  outro para produção. 
 
-### Principais Dependências
+	-   Os dois bancos foram (vCaixa e vCaixadev) encontram-se em um cluster criado no **MongoDB Atlas**.
+
+	-  **Mongoose** foi utilizado para a criação dos schemas.
+
+### Outras Dependências
 
 -   **prettier** e **eslint** para embelezar e padronizar a formatação do código.
 
@@ -74,11 +77,11 @@ Foi feito o deploy desse projeto para o website [Vercel](https://vercel.com/kevi
 
 5.  Agora você poderá clicar em um desses 3 botões. Alternativamente, você pode selecionar as mesmas opções no botão **opções do usuário**, localizado no canto direito da NavBar.
 
-	  **Simular uma  movimentação:** Permite simular uma nova movimentação para o  seu caixa.
+	-  *Simular uma  movimentação*: Permite simular uma nova movimentação para o  seu caixa.
 
-	  **Ver a lista de movimentações:**  Retorna uma tabela contendo o saldo do caixa do usuário e todas as suas movimentações realizadas no dia até o momento.
+	- *Ver a lista de movimentações*:  Retorna uma tabela contendo o saldo do caixa do usuário e todas as suas movimentações realizadas no dia até o momento.
 
-	  **Adicionar categoria:**  Permite adicionar categorias no banco de dados, para que o usuário consiga  selecionar uma delas no momento de criação de uma nova movimentação.
+	-  *Adicionar categoria*:  Permite adicionar categorias no banco de dados, para que o usuário consiga  selecionar uma delas no momento de criação de uma nova movimentação.
 
 6. Primeiramente, selecione **Adicionar categoria** e aguarde para ser redirecionado. Em seguida, digite o nome desejado para a sua nova categoria e clique em **Cadastrar Categoria**. Uma mensagem de sucesso no cadastro aparecerá.
 
