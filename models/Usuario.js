@@ -1,5 +1,5 @@
-const { ObjectId } = require('mongodb');
-const mongoose = require('mongoose');
+const { ObjectId } = require('mongodb')
+const mongoose = require('mongoose')
 
 const UsuarioSchema = new mongoose.Schema(
     {
@@ -18,6 +18,6 @@ const UsuarioSchema = new mongoose.Schema(
     {
         versionKey: false
     }
-);
+)
 
-module.exports = mongoose.models.Usuario || mongoose.model('Usuario', UsuarioSchema, 'usuarios');
+module.exports = mongoose.models.Usuario || mongoose.model('Usuario', UsuarioSchema, 'usuarios')

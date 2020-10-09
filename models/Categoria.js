@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const CategoriaSchema = new mongoose.Schema(
     {
@@ -10,7 +10,7 @@ const CategoriaSchema = new mongoose.Schema(
     {
         versionKey: false
     }
-);
+)
 
 module.exports =
-    mongoose.models.Categoria || mongoose.model('Categoria', CategoriaSchema, 'categorias');
+    mongoose.models.Categoria || mongoose.model('Categoria', CategoriaSchema, 'categorias')

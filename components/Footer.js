@@ -1,6 +1,6 @@
-import Link from 'next/link';
+import Link from 'next/link'
 
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 
 const Footer = () => (
     <div>
@@ -8,6 +8,6 @@ const Footer = () => (
             <Navbar.Text className="mx-auto">© Virtual Box Company</Navbar.Text>
         </Navbar>
     </div>
-);
+)
 
-export default Footer;
+export default Footer

@@ -1,30 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import cookie from 'js-cookie';
-import { Container, Row, Button, Form, Alert } from 'react-bootstrap';
-import Link from 'next/link';
+import React, { useState, useEffect } from 'react'
+import cookie from 'js-cookie'
+import { Container, Row, Button, Form, Alert } from 'react-bootstrap'
+import Link from 'next/link'
 
 const Signup = (hide) => {
-    const [form, setForm] = useState({ email: '', password: '' });
-    const [signupError, setSignupError] = useState('');
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [errors, setErrors] = useState({});
-    const [showAlert, setShowAlert] = useState(false);
+    const [form, setForm] = useState({ email: '', password: '' })
+    const [signupError, setSignupError] = useState('')
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [errors, setErrors] = useState({})
+    const [showAlert, setShowAlert] = useState(false)
 
     useEffect(() => {
         if (isSubmitting) {
             if (Object.keys(errors).length === 0) {
-                execSignup();
-                setIsSubmitting(false);
-                setShowAlert(true);
+                execSignup()
+                setIsSubmitting(false)
             }
         }
-    });
+    })
 
     function handleSubmit(e) {
-        e.preventDefault();
-        let errs = validate();
-        setErrors(errs);
-        setIsSubmitting(true);
+        e.preventDefault()
+        let errs = validate()
+        setErrors(errs)
+        setIsSubmitting(true)
     }
 
     const execSignup = async () => {
@@ -41,35 +40,36 @@ const Signup = (hide) => {
             .then((r) => r.json())
             .then((data) => {
                 if (data && data.error) {
-                    setSignupError(data.message);
+                    setSignupError(data.message)
                 }
                 if (data && data.token) {
                     //set cookie
-                    cookie.set('token', data.token, { expires: 150 });
+                    cookie.set('token', data.token, { expires: 150 })
+                    setShowAlert(true)
                 }
-            });
-    };
+            })
+    }
 
     const validate = () => {
-        let err = {};
+        let err = {}
 
         if (!form.email) {
-            err.email = 'Você precisa inserir o seu e-mail.';
+            err.email = 'Você precisa inserir o seu e-mail.'
         }
 
         if (!form.password) {
-            err.password = 'Você precisa inserir uma senha.';
+            err.password = 'Você precisa inserir uma senha.'
         }
 
-        return err;
-    };
+        return err
+    }
 
     const handleChange = (event) => {
         setForm({
             ...form,
             [event.target.name]: event.target.value
-        });
-    };
+        })
+    }
 
     return (
         <Container style={{ marginTop: 170, marginBottom: 170 }}>
@@ -126,13 +126,13 @@ const Signup = (hide) => {
                 </Alert>
             </Row>
         </Container>
-    );
-};
+    )
+}
 
-export default Signup;
+export default Signup
 
 Signup.getInitialProps = () => {
     return {
         hide: true
-    };
-};
+    }
+}

@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { Jumbotron, Button, Container, Row, Col } from 'react-bootstrap';
+import Link from 'next/link'
+import { Jumbotron, Button, Container, Row, Col } from 'react-bootstrap'
 
 export default function Home(hide) {
     return (
@@ -26,11 +26,11 @@ export default function Home(hide) {
                 </Row>
             </Jumbotron>
         </Container>
-    );
+    )
 }
 
 Home.getInitialProps = () => {
     return {
         hide: true
-    };
-};
+    }
+}

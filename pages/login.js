@@ -1,26 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import Router from 'next/router';
-import cookie from 'js-cookie';
-import { Container, Row, Button, Form } from 'react-bootstrap';
-import Link from 'next/link';
+import React, { useState, useEffect } from 'react'
+import Router from 'next/router'
+import cookie from 'js-cookie'
+import { Container, Row, Button, Form } from 'react-bootstrap'
+import Link from 'next/link'
 
-const jwt = require('jsonwebtoken');
-const jwtSecret = 'SUPERSECRETE20220';
+const jwt = require('jsonwebtoken')
+const jwtSecret = 'SUPERSECRETE20220'
 
 const Login = () => {
-    const [form, setForm] = useState({ email: '', password: '' });
-    const [loginError, setLoginError] = useState('');
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [errors, setErrors] = useState({});
+    const [form, setForm] = useState({ email: '', password: '' })
+    const [loginError, setLoginError] = useState('')
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [errors, setErrors] = useState({})
 
     useEffect(() => {
         if (isSubmitting) {
             if (Object.keys(errors).length === 0) {
-                execLogin();
-                setIsSubmitting(false);
+                execLogin()
+                setIsSubmitting(false)
             }
         }
-    });
+    })
 
     const execLogin = async () => {
         await fetch(`${process.env.API_URL}/api/auth`, {
@@ -34,50 +34,50 @@ const Login = () => {
             })
         })
             .then((r) => {
-                return r.json();
+                return r.json()
             })
             .then(async (data) => {
                 if (data && data.error) {
-                    setLoginError(data.message);
+                    setLoginError(data.message)
                 }
                 if (data && data.token) {
                     //set cookie
-                    cookie.set('token', data.token, { expires: 2147483647 });
-                    const token = data.token.split(' ');
-                    const decodedToken = jwt.verify(token[0], jwtSecret);
-                    Router.push(`/usuarios/${decodedToken.userId}`);
+                    cookie.set('token', data.token, { expires: 2147483647 })
+                    const token = data.token.split(' ')
+                    const decodedToken = jwt.verify(token[0], jwtSecret)
+                    Router.push(`/usuarios/${decodedToken.userId}`)
                 }
-            });
-    };
+            })
+    }
 
     function handleSubmit(e) {
-        e.preventDefault();
-        let errs = validate();
-        setErrors(errs);
+        e.preventDefault()
+        let errs = validate()
+        setErrors(errs)
 
-        setIsSubmitting(true);
+        setIsSubmitting(true)
     }
 
     const handleChange = (event) => {
         setForm({
             ...form,
             [event.target.name]: event.target.value
-        });
-    };
+        })
+    }
 
     const validate = () => {
-        let err = {};
+        let err = {}
 
         if (!form.email) {
-            err.email = 'Você precisa inserir o seu e-mail.';
+            err.email = 'Você precisa inserir o seu e-mail.'
         }
 
         if (!form.password) {
-            err.password = 'Você precisa inserir uma senha.';
+            err.password = 'Você precisa inserir uma senha.'
         }
 
-        return err;
-    };
+        return err
+    }
 
     return (
         <Container style={{ marginTop: 170, marginBottom: 170 }}>
@@ -121,13 +121,13 @@ const Login = () => {
                 </Link>
             </Row>
         </Container>
-    );
-};
+    )
+}
 
-export default Login;
+export default Login
 
 Login.getInitialProps = () => {
     return {
         hide: true
-    };
-};
+    }
+}

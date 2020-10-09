@@ -1,6 +1,6 @@
-import Head from 'next/head';
-import Link from 'next/link';
-import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import Head from 'next/head'
+import Link from 'next/link'
+import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 
 const Header = (props) => {
     return (
@@ -10,7 +10,7 @@ const Header = (props) => {
             </Head>
             <Navbar fixed="top" collapseOnSelect expand="lg" bg="primary" variant="dark">
                 <Navbar.Brand>
-                    <img height="25" src='/cash-register.png' style={{ marginRight: '10px' }} />
+                    <img height="25" src="/cash-register.png" style={{ marginRight: '10px' }} />
                     Caixa Virtual
                 </Navbar.Brand>
                 <Navbar.Toggle
@@ -52,7 +52,7 @@ const Header = (props) => {
                 </Navbar.Collapse>
             </Navbar>
         </div>
-    );
-};
+    )
+}
 
-export default Header;
+export default Header

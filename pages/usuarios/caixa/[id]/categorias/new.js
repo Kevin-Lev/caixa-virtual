@@ -1,49 +1,49 @@
-import { useEffect, useState } from 'react';
-import { Container, Row, Button, Form, Alert } from 'react-bootstrap';
+import { useEffect, useState } from 'react'
+import { Container, Row, Button, Form, Alert } from 'react-bootstrap'
 
 export default function NewCategoria() {
-    const [form, setForm] = useState({ name: '' });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [insertedCategory, setInsertedCategory] = useState('');
-    const [errors, setErrors] = useState({});
-    const [showAlert, setShowAlert] = useState(false);
+    const [form, setForm] = useState({ name: '' })
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [insertedCategory, setInsertedCategory] = useState('')
+    const [errors, setErrors] = useState({})
+    const [showAlert, setShowAlert] = useState(false)
 
     useEffect(() => {
         if (isSubmitting) {
             if (Object.keys(errors).length === 0) {
-                createCategoria();
-                setIsSubmitting(false);
+                createCategoria()
+                setIsSubmitting(false)
             }
         }
-    });
+    })
 
     const handleSubmit = (event) => {
-        event.preventDefault();
-        let errs = validate();
-        setErrors(errs);
-        setIsSubmitting(true);
-        setInsertedCategory(form.name);
+        event.preventDefault()
+        let errs = validate()
+        setErrors(errs)
+        setIsSubmitting(true)
+        setInsertedCategory(form.name)
         if (Object.keys(errs).length === 0 && errs.constructor === Object) {
-            setShowAlert(true);
+            setShowAlert(true)
         }
-    };
+    }
 
     const handleChange = (event) => {
         setForm({
             ...form,
             [event.target.name]: event.target.value
-        });
-    };
+        })
+    }
 
     const validate = () => {
-        let err = {};
+        let err = {}
 
         if (!form.name) {
-            err.name = 'Você precisa inserir um nome para a categoria.';
+            err.name = 'Você precisa inserir um nome para a categoria.'
         }
 
-        return err;
-    };
+        return err
+    }
 
     const createCategoria = async () => {
         try {
@@ -54,11 +54,11 @@ export default function NewCategoria() {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(form)
-            });
+            })
         } catch (err) {
-            console.error(err);
+            console.error(err)
         }
-    };
+    }
 
     return (
         <>
@@ -101,14 +101,14 @@ export default function NewCategoria() {
                 </Row>
             </Container>
         </>
-    );
+    )
 }
 
 NewCategoria.getInitialProps = async ({ query: { id } }) => {
-    const res = await fetch(`${process.env.API_URL}/api/caixa/${id}`);
-    const { data } = await res.json();
+    const res = await fetch(`${process.env.API_URL}/api/caixa/${id}`)
+    const { data } = await res.json()
 
     return {
         idCaixa: data._id
-    };
-};
+    }
+}

@@ -1,22 +1,22 @@
-import Usuario from '../../../models/Usuario';
-import dbConnect from '../../../util/dbConnect';
+import Usuario from '../../../models/Usuario'
+import dbConnect from '../../../util/dbConnect'
 
-dbConnect();
+dbConnect()
 
-const assert = require('assert');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
-const jwtSecret = 'SUPERSECRETE20220';
+const assert = require('assert')
+const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
+const mongoose = require('mongoose')
+const jwtSecret = 'SUPERSECRETE20220'
 
-const saltRounds = 10;
+const saltRounds = 10
 
 function findUser(email, callback) {
-    Usuario.findOne({ email }, callback);
+    Usuario.findOne({ email }, callback)
 }
 
 async function createUser(email, password, callback) {
-    const caixa = await createCaixa();
+    const caixa = await createCaixa()
 
     bcrypt.hash(password, saltRounds, function (err, hash) {
         // Store hash in your password DB.
@@ -27,16 +27,16 @@ async function createUser(email, password, callback) {
                 caixa
             },
             function (err, userCreated) {
-                assert.strictEqual(err, null);
-                callback(userCreated);
+                assert.strictEqual(err, null)
+                callback(userCreated)
             }
-        );
-    });
+        )
+    })
 }
 
 const createCaixa = async () => {
     try {
-        const newCaixa = newBodyCaixa();
+        const newCaixa = newBodyCaixa()
 
         const res = await fetch(`${process.env.API_URL}/api/caixa`, {
             method: 'POST',
@@ -45,41 +45,41 @@ const createCaixa = async () => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(newCaixa)
-        });
+        })
 
-        return newCaixa._id;
+        return newCaixa._id
     } catch (err) {
-        console.error(err);
+        console.error(err)
     }
-};
+}
 
 const newBodyCaixa = () => {
-    const caixa = {};
+    const caixa = {}
 
-    caixa._id = mongoose.Types.ObjectId();
-    caixa.saldoTotal = 0;
-    caixa.movimentacoes = [];
+    caixa._id = mongoose.Types.ObjectId()
+    caixa.saldoTotal = 0
+    caixa.movimentacoes = []
 
-    return caixa;
-};
+    return caixa
+}
 
 export default (req, res) => {
     if (req.method === 'POST') {
         // signup
         try {
-            assert.notStrictEqual(null, req.body.email, 'Email é necessário');
-            assert.notStrictEqual(null, req.body.password, 'Senha é necessária');
+            assert.notStrictEqual(null, req.body.email, 'Email é necessário')
+            assert.notStrictEqual(null, req.body.password, 'Senha é necessária')
         } catch (bodyError) {
-            res.status(403).json({ error: true, message: bodyError.message });
+            res.status(403).json({ error: true, message: bodyError.message })
         }
 
-        const email = req.body.email;
-        const password = req.body.password;
+        const email = req.body.email
+        const password = req.body.password
 
         findUser(email, function (err, user) {
             if (err) {
-                res.status(500).json({ error: true, message: 'Erro ao encontrar usuário' });
-                return;
+                res.status(500).json({ error: true, message: 'Erro ao encontrar usuário' })
+                return
             }
             if (!user) {
                 // procede para a criação de usuário
@@ -90,19 +90,19 @@ export default (req, res) => {
                             creationResult.constructor === Object
                         )
                     ) {
-                        const user = creationResult;
+                        const user = creationResult
                         const token = jwt.sign({ userId: user._id, email: user.email }, jwtSecret, {
                             expiresIn: 3000 //50 minutos
-                        });
-                        res.status(200).json({ token });
-                        return;
+                        })
+                        res.status(200).json({ token })
+                        return
                     }
-                });
+                })
             } else {
                 // Usuário já existe
-                res.status(403).json({ error: true, message: 'Email já existe!' });
-                return;
+                res.status(403).json({ error: true, message: 'Email já existe!' })
+                return
             }
-        });
+        })
     }
-};
+}

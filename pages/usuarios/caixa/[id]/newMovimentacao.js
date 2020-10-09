@@ -1,66 +1,65 @@
-import { Container, Card, Row, Col, Form, Alert, Button } from 'react-bootstrap';
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import { Container, Card, Row, Col, Form, Alert, Button } from 'react-bootstrap'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
 
 export default function newMovimentacao({ caixa, categorias }) {
-    const formCatValue = categorias && categorias.length ? categorias[0]._id : null;
+    const formCatValue = categorias && categorias.length ? categorias[0]._id : null
 
     const [form, setForm] = useState({
         categoria: formCatValue,
         tipo: 'ENTRADA',
         valor: 0.0,
         descricao: ''
-    });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [errors, setErrors] = useState({});
-    const [showAlert, setShowAlert] = useState(false);
+    })
+    const [isSubmitting, setIsSubmitting] = useState(false)
+    const [errors, setErrors] = useState({})
+    const [showAlert, setShowAlert] = useState(false)
 
     useEffect(() => {
         if (isSubmitting) {
             if (Object.keys(errors).length === 0) {
-                createMovimentacao();
-                setIsSubmitting(false);
+                createMovimentacao()
+                setIsSubmitting(false)
             }
         }
-    });
+    })
 
     const handleSubmit = (event) => {
-        event.preventDefault();
-        let errs = validate();
-        setErrors(errs);
-        setIsSubmitting(true);
+        event.preventDefault()
+        let errs = validate()
+        setErrors(errs)
+        setIsSubmitting(true)
         if (Object.keys(errs).length === 0 && errs.constructor === Object) {
-            setShowAlert(true);
+            setShowAlert(true)
         }
-    };
+    }
 
     const handleChange = (event) => {
         setForm({
             ...form,
             [event.target.name]: event.target.value
-        });
-    };
+        })
+    }
 
     const validate = () => {
-        let err = {};
+        let err = {}
 
         if (!form.descricao) {
-            err.descricao = 'Você precisa inserir uma descrição.';
+            err.descricao = 'Você precisa inserir uma descrição.'
         }
 
         if (!form.valor) {
-            err.valor = 'Você precisa inserir um valor.';
+            err.valor = 'Você precisa inserir um valor.'
         }
 
-        return err;
-    };
+        return err
+    }
 
     const bodyUpdate = () => {
-
         if (form.tipo === 'ENTRADA') {
-            caixa.saldoTotal += parseFloat(form.valor);
+            caixa.saldoTotal += parseFloat(form.valor)
         } else {
-            caixa.saldoTotal -= parseFloat(form.valor);
+            caixa.saldoTotal -= parseFloat(form.valor)
         }
 
         caixa.movimentacoes.push({
@@ -69,13 +68,13 @@ export default function newMovimentacao({ caixa, categorias }) {
             tipo: form.tipo,
             valor: form.valor,
             descricao: form.descricao
-        });
+        })
 
-        return caixa;
-    };
+        return caixa
+    }
 
     const idGenerator = () =>
-        Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+        Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
 
     const createMovimentacao = async () => {
         try {
@@ -86,11 +85,11 @@ export default function newMovimentacao({ caixa, categorias }) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(bodyUpdate())
-            });
+            })
         } catch (err) {
-            console.error(err);
+            console.error(err)
         }
-    };
+    }
 
     return (
         <Container>
@@ -198,19 +197,19 @@ export default function newMovimentacao({ caixa, categorias }) {
                 </Alert>
             </Row>
         </Container>
-    );
+    )
 }
 
 newMovimentacao.getInitialProps = async ({ query: { id } }) => {
-    const res = await fetch(`${process.env.API_URL}/api/caixa/${id}`);
-    const caixaJson = await res.json();
+    const res = await fetch(`${process.env.API_URL}/api/caixa/${id}`)
+    const caixaJson = await res.json()
 
-    const categoriaRes = await fetch(`${process.env.API_URL}/api/categorias`);
-    const { data } = await categoriaRes.json();
+    const categoriaRes = await fetch(`${process.env.API_URL}/api/categorias`)
+    const { data } = await categoriaRes.json()
 
     return {
         idCaixa: caixaJson.data._id,
         caixa: caixaJson.data,
         categorias: data
-    };
-};
+    }
+}

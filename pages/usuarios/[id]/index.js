@@ -1,5 +1,5 @@
-import Link from 'next/link';
-import { Jumbotron, Container, Row, Col, Button } from 'react-bootstrap';
+import Link from 'next/link'
+import { Jumbotron, Container, Row, Col, Button } from 'react-bootstrap'
 
 export default function Usuario(props) {
     return (
@@ -30,17 +30,17 @@ export default function Usuario(props) {
                 </Jumbotron>
             </Container>
         </>
-    );
+    )
 }
 
 Usuario.getInitialProps = async ({ query: id }) => {
-    const idUser = id.id;
-    const res = await fetch(`${process.env.API_URL}/api/usuarios/${idUser}`);
-    const { data } = await res.json();
+    const idUser = id.id
+    const res = await fetch(`${process.env.API_URL}/api/usuarios/${idUser}`)
+    const { data } = await res.json()
 
     return {
         id: data._id,
         email: data.email,
         idCaixa: data.caixa
-    };
-};
+    }
+}

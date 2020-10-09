@@ -1,5 +1,5 @@
-const { ObjectId } = require('mongodb');
-const mongoose = require('mongoose');
+const { ObjectId } = require('mongodb')
+const mongoose = require('mongoose')
 
 const CaixaSchema = new mongoose.Schema(
     {
@@ -40,6 +40,6 @@ const CaixaSchema = new mongoose.Schema(
     {
         versionKey: false
     }
-);
+)
 
-module.exports = mongoose.models.Caixa || mongoose.model('Caixa', CaixaSchema, 'caixa');
+module.exports = mongoose.models.Caixa || mongoose.model('Caixa', CaixaSchema, 'caixas')

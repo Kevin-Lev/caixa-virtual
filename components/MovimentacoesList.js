@@ -1,5 +1,5 @@
-import { Table, Container, Row } from 'react-bootstrap';
-import moment from 'moment';
+import { Table, Container, Row } from 'react-bootstrap'
+import moment from 'moment'
 
 const MovimentacoesList = ({ caixa }) => (
     <Container style={{ marginTop: 120, marginBottom: '20%', width: '80%' }}>
@@ -55,6 +55,6 @@ const MovimentacoesList = ({ caixa }) => (
             `}
         </style>
     </Container>
-);
+)
 
-export default MovimentacoesList;
+export default MovimentacoesList

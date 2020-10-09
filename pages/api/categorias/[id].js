@@ -1,43 +1,43 @@
-import dbConnect from '../../../util/dbConnect';
-import Categoria from '../../../models/Categoria';
+import dbConnect from '../../../util/dbConnect'
+import Categoria from '../../../models/Categoria'
 
-dbConnect();
+dbConnect()
 
 export default async (req, res) => {
     const {
         query: { id },
         method
-    } = req;
+    } = req
 
     switch (method) {
         case 'GET':
             try {
-                const categoria = await Categoria.findById(id);
+                const categoria = await Categoria.findById(id)
 
                 if (!categoria) {
-                    return res.status(400).json({ success: false });
+                    return res.status(400).json({ success: false })
                 }
 
-                res.status(200).json({ success: true, data: categoria });
+                res.status(200).json({ success: true, data: categoria })
             } catch (error) {
-                console.error('GET request: ' + error);
-                res.status(400).json({ sucess: false });
+                console.error('GET request: ' + error)
+                res.status(400).json({ sucess: false })
             }
-            break;
+            break
         case 'PUT':
             try {
                 const categoria = await Categoria.findByIdAndUpdate(id, req.body, {
                     new: true,
                     runValidators: true
-                });
+                })
 
                 if (!categoria) {
-                    return res.status(400).json({ success: false });
+                    return res.status(400).json({ success: false })
                 }
             } catch (error) {
-                console.error('PUT request' + error);
-                res.status(400).json({ sucess: false });
+                console.error('PUT request' + error)
+                res.status(400).json({ sucess: false })
             }
-            break;
+            break
     }
-};
+}
