@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import cookie from 'js-cookie';
-import { Container, Row, Button, Form, Alert } from 'react-bootstrap';
+import { Container, Row, Button, Form } from 'react-bootstrap';
 import Link from 'next/link';
 
 const jwt = require('jsonwebtoken');
 const jwtSecret = 'SUPERSECRETE20220';
 
-const Login = (hide) => {
+const Login = () => {
     const [form, setForm] = useState({ email: '', password: '' });
     const [loginError, setLoginError] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -26,7 +26,8 @@ const Login = (hide) => {
         await fetch(`${process.env.API_URL}/api/auth`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'     
             },
             body: JSON.stringify({
                 email: form.email,

@@ -51,4 +51,4 @@ $ yarn start
 
 ## Deploy
 
-Foi feito o deploy desse projeto para o website Vercel. Você pode visualizá-lo clicando [aqui](https://vercel.com/kevinlevroner/caixa-virtual).
+Foi feito o deploy desse projeto para o website Vercel. Você pode visualizá-lo clicando [aqui](https://vercel.com/kevinlevroner/caixa-virtual){:target="_blank rel="noopener"}.
