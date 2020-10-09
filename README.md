@@ -105,7 +105,7 @@ Foi feito o deploy desse projeto para o website [Vercel](https://vercel.com/kevi
 
 9. Repita o **passo 6** para adicionar novas categorias para o seu caixa e o **passo 7** se quiser adicionar uma nova movimentação. Caso deseje sair da sessão, clique em **opções do usuário**, selecione *Sair* e aguarde o retorno para a página de Login.
 
-10. Se você desejar ver o .json contendo o saldo total e as movimentações da caixa do usuário autenticado sendo retornado diretamente, digite na barra de endereços:
+10. Se você desejar ver o .json contendo o saldo total e as movimentações da caixa do usuário autenticado sendo retornado diretamente, digite na barra de endereços do navegador:
 
 	```bash
 	#Se estiver executando local em modo Dev
@@ -114,6 +114,8 @@ Foi feito o deploy desse projeto para o website [Vercel](https://vercel.com/kevi
 	#Se estiver no site
 		'https://caixa-virtual-six.vercel.app/api/caixa/_id_da_caixa''
 	```
+	
+	Exemplo de retorno do navegador Firefox:
 	
 	![Alt text](/public/json_api.png?raw=true "jsonApi")
 
