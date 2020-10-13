@@ -28,7 +28,7 @@ O vCaixa.dev é um website desenvolvido pela _Virtual Box Company_, com o objeti
 
 -   **MongoDB**: Foram criados dois bancos de dados, um para desenvolvimento e outro para produção.
 
-    -   Os dois bancos foram (vCaixa e vCaixadev) encontram-se em um cluster criado no **MongoDB Atlas**.
+    -   Os dois bancos (vCaixa e vCaixadev) encontram-se em um cluster criado no **MongoDB Atlas**.
 
     -   **Mongoose** foi utilizado para a criação dos schemas.
 
