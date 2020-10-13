@@ -1,7 +1,9 @@
 module.exports = {
     env: {
-        MONGO_URI: process.env.NODE_ENV === 'development' ? 
-            `mongodb+srv://Kevin:teste@clustercep.zs0fs.mongodb.net/vCaixadev?retryWrites=true&w=majority` : `mongodb+srv://Kevin:teste@clustercep.zs0fs.mongodb.net/vCaixa?retryWrites=true&w=majority`,
+        MONGO_URI:
+            process.env.NODE_ENV === 'development'
+                ? `mongodb+srv://Kevin:teste@clustercep.zs0fs.mongodb.net/vCaixadev?retryWrites=true&w=majority`
+                : `mongodb+srv://Kevin:teste@clustercep.zs0fs.mongodb.net/vCaixa?retryWrites=true&w=majority`,
         API_URL:
             process.env.NODE_ENV === 'development'
                 ? 'http://localhost:3000'
